@@ -11,13 +11,13 @@ function App() {
   const [board, setBoard] = useState(defaultBoard)
   const [curRow, setCurRow] = useState(0)
   const [curColumn, setCurColumn] = useState(0)
-
+  const correctWord = "right"
   
   return (
     <div className="App">
       <nav className="nav"><h1>Wordle</h1></nav>
       <AppContext.Provider 
-      value={{board, setBoard, curRow, setCurRow, curColumn, setCurColumn}}>
+      value={{board, setBoard, correctWord, curRow, setCurRow, curColumn, setCurColumn}}>
         <div className="game">
           <Board />
           <Keyboard />

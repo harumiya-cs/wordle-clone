@@ -7,9 +7,10 @@ function Key({ keyVal, bigKey=false }) {
   const onKeyClick = () => {
     const newBoard = [...board]
     if(keyVal === "ENTER"){
-      if(curColumn === 5 && curRow < 5){
+      if(curColumn === 5 && curRow <= 5){
         setCurColumn(0)
         setCurRow(curRow + 1)
+
       } 
       return
     } else if(keyVal === "DELETE"){

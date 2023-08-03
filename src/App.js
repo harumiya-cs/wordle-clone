@@ -1,8 +1,8 @@
 import './App.css';
 import Board from './components/Board';
 import Keyboard from './components/Keyboard';
-import { defaultBoard } from './words';
-import { useState, createContext } from 'react';
+import { defaultBoard, generateWordSet } from './words';
+import { useState, createContext, useEffect } from 'react';
 
 export const AppContext = createContext()
 
@@ -11,7 +11,15 @@ function App() {
   const [board, setBoard] = useState(defaultBoard)
   const [curRow, setCurRow] = useState(0)
   const [curColumn, setCurColumn] = useState(0)
-  const correctWord = "right"
+  const [wordSet, setWordSet] = useState(new Set())
+  const [disabledLetters, setDisabledLetters] = useState([])
+  const correctWord = "right\r"
+
+  useEffect(() => {
+    generateWordSet().then((words) => {
+      setWordSet(words.wordSet)
+    })
+  }, [])
 
   const onSelectLetter = (keyVal) => {
     if(curColumn > 4) return
@@ -31,8 +39,26 @@ function App() {
 
   const onEnter = () => {
     if(curColumn !== 5) return
-    setCurRow(curRow + 1)
-    setCurColumn(0)
+
+    let curWord = ""
+    for(let i = 0; i < 5; i++){
+      curWord += board[curRow][i]
+    }
+    curWord += "\r"
+
+    if(wordSet.has(curWord.toLowerCase())){
+      setCurRow(curRow + 1)
+      setCurColumn(0)
+    } else {
+      alert("word not found")
+    }
+
+    
+    if(curWord === correctWord){
+      alert("Game Over")
+    }
+
+    
   }
   
   return (
@@ -40,7 +66,8 @@ function App() {
       <nav className="nav"><h1>Wordle</h1></nav>
       <AppContext.Provider 
       value={{board, setBoard, correctWord, curRow, 
-      setCurRow, curColumn, setCurColumn, onSelectLetter, onDelete, onEnter}}>
+      setCurRow, curColumn, setCurColumn, onSelectLetter, onDelete, 
+      onEnter, disabledLetters, setDisabledLetters}}>
         <div className="game">
           <Board />
           <Keyboard />
@@ -53,11 +80,8 @@ function App() {
 export default App;
 
 
-// APP
-//     navbar
-//     board
-//     keyboard
 
 
 
 // useContext
+// useEffect

@@ -4,7 +4,7 @@ import { AppContext } from '../App'
 
 
 function Keyboard() {
-  const {onSelectLetter, onEnter, onDelete} = useContext(AppContext)
+  const {onSelectLetter, onEnter, onDelete, disabledLetters} = useContext(AppContext)
   const line1 = ['q','w','e','r','t','y','u','i','o','p']
   const line2 = ['a','s','d','f','g','h','j','k','l']
   const line3 = ['z','x','c','v','b','n','m',]
@@ -22,7 +22,7 @@ function Keyboard() {
       })
 
       line2.forEach((key) => {
-        if(event.key.toLower() === key.toLowerCase()) {
+        if(event.key.toLowerCase() === key.toLowerCase()) {
           onSelectLetter(key)
         }
       })
@@ -49,7 +49,7 @@ function Keyboard() {
       <div className="line1">
         {
           line1.map((key) => (
-            <Key keyVal={key}/>
+            <Key keyVal={key} disabled={ disabledLetters.includes(key)} />
           ))
         }
       </div>
@@ -57,7 +57,7 @@ function Keyboard() {
       <div className="line2">
         {
           line2.map((key) => (
-            <Key keyVal={key}/>
+            <Key keyVal={key} disabled={ disabledLetters.includes(key)} />
           ))
         }
       </div>
@@ -66,7 +66,7 @@ function Keyboard() {
         <Key keyVal="ENTER" bigKey={true}/>
         {
           line3.map((key) => (
-            <Key keyVal={key}/>
+            <Key keyVal={key} disabled={ disabledLetters.includes(key)} />
           ))
         }
         <Key keyVal="DELETE" bigKey={true} />

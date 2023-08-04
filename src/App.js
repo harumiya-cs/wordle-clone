@@ -53,6 +53,7 @@ function App() {
       setCurRow(curRow + 1)
       setCurColumn(0)
     } else {
+      console.log(correctWord, curWord)
       alert("word not found")
     }
 

@@ -48,7 +48,6 @@ function App() {
     for(let i = 0; i < 5; i++){
       curWord += board[curRow][i]
     }
-    curWord += "\r"
 
     if(wordSet.has(curWord.toLowerCase())){
       setCurRow(curRow + 1)

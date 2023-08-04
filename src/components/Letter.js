@@ -14,7 +14,7 @@ function Letter({row, column}) {
   
   useEffect(() => {
     if (letter !== "" && !correct && !present) {
-      console.log(letter);
+      // console.log(letter);
       setDisabledLetters((prev) => [...prev, letter]);
     }
   }, [curRow]);

@@ -3,7 +3,7 @@ import { AppContext } from '../App'
 
 
 function Letter({row, column}) {
-  const { board, correctWord, curRow, disabledLetters, setDisabledLetters } = useContext(AppContext)
+  const { board, correctWord, curRow, setDisabledLetters } = useContext(AppContext)
   const letter = board[row][column]
 
 
